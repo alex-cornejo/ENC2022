@@ -97,8 +97,7 @@ print('Execution time:', elapsed_time, 'seconds')
 
 """
 PART 4
-PLOT SOLUTION AND CONVERGENCE
-(only for EUC2D instances)
+PLOT CONVERGENCE
 """
 # get best individual ever seen
 best_ind = hof.items.pop(0)
