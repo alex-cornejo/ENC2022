@@ -1,8 +1,10 @@
+import array
 import random
+import time as tm
 
 import numpy as np
 
-import plotter
+import tsp_plotter
 
 """
 PART 0
@@ -23,7 +25,7 @@ D, I = read_TSPLIB_instance(input_file)
 n = len(D)  # number of nodes in the graph
 
 
-# fitness function definition fo the TSP
+# fitness function definition for the TSP
 def fitness_function(ind):
     distance = 0
     for i in range(n - 1):
@@ -38,19 +40,19 @@ def fitness_function(ind):
 PART 2
 SETUP DEAP framework parameters
 """
-pop_size = 100  # population size
-n_gen = 100  # number of generations
+pop_size = 200  # population size
+n_gen = 200  # number of generations
 pm = 1.0 / n  # mutation probability
 pcx = 1  # recombination probability
 k = 3  # tournament selection
 
 """
 weight:
-    +1 for maximization
-    -1 for minimization
+    +1.0 for maximization
+    -1.0 for minimization
 """
-creator.create("FitnessMin", base.Fitness, weights=(-1,))
-creator.create("Individual", list, fitness=creator.FitnessMin)
+creator.create("FitnessMin", base.Fitness, weights=(-1.0,))
+creator.create("Individual", array.array, typecode='i', fitness=creator.FitnessMin)
 toolbox = base.Toolbox()
 
 # representation of individuals
@@ -88,8 +90,12 @@ stats.register("Min", np.min)
 stats.register("Max", np.max)
 
 # run Genetic Algorithm
+st = tm.time()
 pop, log = algorithms.eaSimple(pop, toolbox, cxpb=pcx, mutpb=pm, ngen=n_gen, stats=stats,
                                halloffame=hof, verbose=True)
+# get the running time
+elapsed_time = tm.time() - st
+print('Execution time:', elapsed_time, 'seconds')
 
 """
 PART 4
@@ -100,8 +106,8 @@ PLOT SOLUTION AND CONVERGENCE
 best_ind = hof.items.pop(0)
 
 # plot solution
-plotter.print_graph([tuple(l) for l in I.DISPLAY_DATA_SECTION],
-                    list(best_ind), best_ind.fitness.values[0])
+tsp_plotter.print_graph([tuple(l) for l in I.DISPLAY_DATA_SECTION],
+                        list(best_ind), best_ind.fitness.values[0])
 
 # plot convergence
-plotter.print_convergence([log[i]["Min"] for i in range(n_gen)], "fitness")
+tsp_plotter.print_convergence([log[i]["Min"] for i in range(n_gen)], "fitness")

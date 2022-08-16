@@ -46,5 +46,5 @@ def print_convergence(data, legend):
     plt.xlabel('iterations')
     plt.ylabel(legend)
     plt.tight_layout()
-    print(plt.rcParams["figure.figsize"])
+    # print(plt.rcParams["figure.figsize"])
     plt.show()
