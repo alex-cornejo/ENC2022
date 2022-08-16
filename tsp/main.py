@@ -94,6 +94,7 @@ pop, log = algorithms.eaSimple(pop, toolbox, cxpb=pcx, mutpb=pm, ngen=n_gen, sta
 """
 PART 4
 PLOT SOLUTION AND CONVERGENCE
+(only for EUC2D instances)
 """
 # get best individual ever seen
 best_ind = hof.items.pop(0)
