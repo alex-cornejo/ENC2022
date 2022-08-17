@@ -18,10 +18,10 @@ from deap import algorithms
 PART 1
 read TSP instance
 """
-from tsp.TSPLIBReader import read_TSPLIB_instance
+import TSPLIBReader
 
 input_file = "TSPLIB/dantzig42.tsp"
-D, I = read_TSPLIB_instance(input_file)
+D, I = TSPLIBReader.read_TSPLIB_instance(input_file)
 n = len(D)  # number of nodes in the graph
 
 

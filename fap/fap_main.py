@@ -5,7 +5,7 @@ import time as tm
 import numpy as np
 
 import FAPProblem
-from fap import fap_plotter
+import fap_plotter
 
 """
 PART 0
